@@ -17,15 +17,16 @@ public class ThirdPersonController : MonoBehaviour
 	public float MoveSpeed = 8.0f;
 	[Tooltip("Sprint speed of the character in m/s")]
 	public float SprintSpeed = 12.0f;
+	private float ogSprintSpeed = 12.0f;
 	[Tooltip("How fast the character turns to face movement direction")]
 	[Range(0.0f, 0.3f)]
 	public float RotationSmoothTime = 0.12f;
 	[Tooltip("Acceleration and deceleration")]
 	public float SpeedChangeRate = 10.0f;
 
-	[Space(10)]
-	[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-	public float Gravity = -15.0f;
+	//[Space(10)]
+	//[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+	//public float Gravity = -15.0f;
 
 	[Space(10)]
 	[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
@@ -114,6 +115,8 @@ public class ThirdPersonController : MonoBehaviour
 		// reset our timeouts on start
 		_jumpTimeoutDelta = JumpTimeout;
 		_fallTimeoutDelta = FallTimeout;
+
+		ogSprintSpeed = SprintSpeed;
 	}
 
 	public void SetRunSpeed(float speed)
@@ -181,49 +184,13 @@ public class ThirdPersonController : MonoBehaviour
 	{
 		// set target speed based on move speed, sprint speed and if sprint is pressed
 		float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-		//bool isWalking = false;
-		//bool isSprinting = false;
+
 		// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 		// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 		// if there is no input, set the target speed to 0
 		if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-		//if (SprintSpeed == 12)
-  //      {
-		//	isSprinting = true;
-  //      }
-		//else
-  //      {
-		//	isSprinting = false;
-  //      }
 
-
-		//if (MoveSpeed == 2.0f)
-  //      {
-		//	isWalking = true;
-  //      }
-		//else
-  //      {
-		//	isWalking = false;
-  //      }
-
-		//if(isWalking)
-  //      {
-		//	_staminaController.weAreSprinting = false;
-  //      }
-
-		//if(!isWalking && isSprinting)
-  //      {
-		//	if(_staminaController.playerStamina > 0)
-  //          {
-		//		_staminaController.weAreSprinting = true;
-		//		_staminaController.Sprinting();
-  //          }
-		//	else
-  //          {
-		//		isWalking = true;
-  //          }
-  //      }
 		// a reference to the players current horizontal velocity
 		float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
@@ -336,10 +303,10 @@ public class ThirdPersonController : MonoBehaviour
 		}
 
 		// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-		if (_verticalVelocity < _terminalVelocity)
-		{
-			_verticalVelocity += Gravity * Time.deltaTime;
-		}
+		//if (_verticalVelocity < _terminalVelocity)
+		//{
+		//	_verticalVelocity += Gravity * Time.deltaTime;
+		//}
 	}
 
 	private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -360,4 +327,18 @@ public class ThirdPersonController : MonoBehaviour
 		// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 		Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 	}
+
+	public bool GetSprintCondition()
+    {
+		return _input.sprint;
+    }
+
+	public void SetSprintSpeed (bool blocked)
+    {
+		if (blocked && SprintSpeed != MoveSpeed)
+		{
+			SprintSpeed = MoveSpeed;
+		}
+		else if(!blocked && SprintSpeed != ogSprintSpeed) SprintSpeed = ogSprintSpeed;
+    }
 }

@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public static bool isPaused;
+
+
     void Start()
     {
         pauseMenu.SetActive(false);
@@ -26,26 +28,30 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        //Cross - Play / A - Xbox
-        if (Input.GetButtonDown("ButtonDown"))
+        if (pauseMenu.activeSelf)
         {
-            
+            //Cross - Play / A - Xbox
+            if (Input.GetButtonDown("ButtonDown"))
+            {
+
+            }
+            //Triangle - Play / Y - Xbox
+            else if (Input.GetButtonDown("ButtonUp"))
+            {
+                ResumeGame();
+            }
+            //Square - Play / X - Xbox
+            else if (Input.GetButtonDown("ButtonLeft"))
+            {
+                GoToMainMenu();
+            }
+            //Circle - Play / B - Xbox
+            else if (Input.GetButtonDown("ButtonRight"))
+            {
+                QuitGame();
+            }
         }
-        //Triangle - Play / Y - Xbox
-        else if (Input.GetButtonDown("ButtonUp"))
-        {
-            ResumeGame();
-        }
-        //Square - Play / X - Xbox
-        else if (Input.GetButtonDown("ButtonLeft"))
-        {
-            GoToMainMenu();
-        }
-        //Circle - Play / B - Xbox
-        else if (Input.GetButtonDown("ButtonRight"))
-        {
-            QuitGame();
-        }
+        
     }
     public void PauseGame()
     {

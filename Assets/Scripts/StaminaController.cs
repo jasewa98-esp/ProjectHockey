@@ -2,86 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityStandardAssets.Characters.FirstPerson;
 
 
 public class StaminaController : MonoBehaviour
 {
-    [Header("Stamina Main Parameters")]
-    public float playerStamina = 100.0f;
-    [SerializeField] private float maxStamina = 100.0f;
-    [HideInInspector] public bool hasRegenerated = true;
-    [HideInInspector] public bool weAreSprinting = false;
+    [SerializeField]
+    private Slider slider;
+    [SerializeField]
+    private CanvasGroup canvasGroup;
+    private ThirdPersonController thirdPersonController;
 
-    [Header("Stamina Regen Parameters")]
-    [Range(0, 50)] [SerializeField] private float staminaDrain = 0.5f;
-    [Range(0, 50)] [SerializeField] private float staminaRegen = 0.5f;
-
-    [Header("Stamina Speed Parameters")]
-    [SerializeField] private float slowedRunSpeed = 5;
-    [SerializeField] private float normalRunSpeed = 8;
-
-
-    [Header("Stamina UI Elements")]
-    [SerializeField] private Image staminaProgressUI = null;
-    [SerializeField] private CanvasGroup sliderCanvasGroup = null;
-
-    private ThirdPersonController playerController;
+    float velocity = 5f;
 
     private void Start()
     {
-        playerController = GetComponent<ThirdPersonController>();
+        thirdPersonController = GetComponent<ThirdPersonController>();
+        slider.value = 1;
     }
 
     private void Update()
     {
-        if(!weAreSprinting)
+        if (slider.value <= 0)
         {
-            if(playerStamina <= maxStamina - 0.01)
-            {
-                playerStamina += staminaRegen * Time.deltaTime;
-                UpdateStamina(1);
-                if(playerStamina >= maxStamina)
-                {
-                    playerController.SetRunSpeed(normalRunSpeed);
-                    sliderCanvasGroup.alpha = 0;
-                    //setejem la vel a normal speed
-                    hasRegenerated = true;
-                }
-            }
-        }
-    }
-
-    public void Sprinting()
-    {
-        if(hasRegenerated)
-        {
-            weAreSprinting = true;
-            playerStamina -= staminaDrain * Time.deltaTime;
-            UpdateStamina(1);
-
-            if(playerStamina <= 0)
-            {
-                hasRegenerated = false;
-                playerController.SetRunSpeed(slowedRunSpeed);
-                sliderCanvasGroup.alpha = 0;
-            }
-        }
-    }
-
-
-    void UpdateStamina(int value)
-    {
-        staminaProgressUI.fillAmount = playerStamina / maxStamina;
-
-        if(value == 0)
-        {
-            sliderCanvasGroup.alpha = 0;
+            thirdPersonController.SetSprintSpeed(true);
         }
         else
         {
-            sliderCanvasGroup.alpha = 1;
+            thirdPersonController.SetSprintSpeed(false);
         }
+
+        if (thirdPersonController.GetSprintCondition())
+        {
+            canvasGroup.alpha = 1;
+            slider.value -= velocity / 2500;
+        }
+        else if (slider.value < 1)
+        {
+            slider.value += velocity / 2500;
+        }
+
+        if (slider.value >= 1) canvasGroup.alpha = 0;
     }
 
+
+    public void ResetStamina()
+    {
+        slider.value = 1;
+        canvasGroup.alpha = 0;
+        thirdPersonController.SetSprintSpeed(false);
+    }
 }
