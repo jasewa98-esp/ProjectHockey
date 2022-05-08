@@ -127,8 +127,7 @@ public class ThirdPersonController : MonoBehaviour
 	
 		GroundedCheck();
 		JumpAndGravity();
-		//if (GameManager.instance.isMoving)
-			Move();
+		if (GameManager.instance.isMoving) Move();
 	}
 
 	private void LateUpdate()

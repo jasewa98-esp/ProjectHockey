@@ -9,6 +9,9 @@ public class PlayerBallMechanism : MonoBehaviour
     GameObject ball;
 
     [SerializeField]
+    GameObject ballPlayerPosition;
+
+    [SerializeField]
     float speed = 6f;
     [SerializeField]
     private float stopBallTimer = 2f;
@@ -34,8 +37,9 @@ public class PlayerBallMechanism : MonoBehaviour
             if(ball == null) ball = other.gameObject;
 
             ball.transform.GetChild(0).GetComponent<SphereCollider>().enabled = false;
+            ball.transform.localPosition = new Vector3(0, 0, 0);
             ball.transform.SetParent(this.transform);
-            ball.transform.localPosition = transform.GetChild(3).localPosition;
+            ball.transform.localPosition = ballPlayerPosition.transform.localPosition;
         }
     }
 
