@@ -34,12 +34,13 @@ public class PlayerBallMechanism : MonoBehaviour
         //Coger Pelotiña
         if(other.tag == "Ball" && !shooting)
         {
-            if(ball == null) ball = other.gameObject;
-
+            if(ball == null) ball = other.gameObject; 
+            ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             ball.transform.GetChild(0).GetComponent<SphereCollider>().enabled = false;
-            ball.transform.localPosition = new Vector3(0, 0, 0);
+            ball.transform.position = new Vector3(0, 0, 0);
             ball.transform.SetParent(this.transform);
-            ball.transform.localPosition = ballPlayerPosition.transform.localPosition;
+            ball.transform.position = ballPlayerPosition.transform.position;
         }
     }
 

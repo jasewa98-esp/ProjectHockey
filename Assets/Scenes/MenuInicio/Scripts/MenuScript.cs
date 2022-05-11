@@ -5,22 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
+    private void Awake()
+    {
+        Cursor.visible = true;
+    }
     public void play()
     {
-        SceneManager.LoadScene(4);//ints and such also work.
+        SceneManager.LoadScene("SelectorEquipo");//ints and such also work.
+    }
+    public void game()
+    {
+        SceneManager.LoadScene("Game");//ints and such also work.
     }
     public void options()
     {
-        SceneManager.LoadScene(2);//ints and such also work.
+        SceneManager.LoadScene("Options");//ints and such also work.
     }
 
     public void login()
     {
-        SceneManager.LoadScene(3);//ints and such also work.
+        SceneManager.LoadScene("LoginScene");//ints and such also work.
     }
     public void backButton()
     {
-        SceneManager.LoadScene(1);//ints and such also work.
+        SceneManager.LoadScene("MainMenu");//ints and such also work.
     }
 
 }

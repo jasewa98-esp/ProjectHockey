@@ -8,6 +8,8 @@ TagManager:
   - Ball
   - PlayerGoal/P1
   - PlayerGoal/P2
+  - Ally
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Ball
+  - Enemy
+  - Player
   - 
   - 
   - 

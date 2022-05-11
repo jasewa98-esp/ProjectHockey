@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -86,11 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        //Recuerda llamar a esto, cuando el jugador haga otro partido!
-        //Volver a empezar partido: llamar a todos los resets blablablaç
-        //crear resets de todo
-        UIController.instance.ResetTimers();
-        UIController.instance.ResetPosition();
+        SceneManager.LoadScene("Game");
     }
 
 

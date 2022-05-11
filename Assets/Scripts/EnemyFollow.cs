@@ -23,6 +23,9 @@ public class EnemyFollow : MonoBehaviour
         InvokeRepeating("DistCheck", 0, 0.5f);
 
         startPos = this.transform.position;
+
+        myAgent.height = 0.5f;
+        myAgent.baseOffset = 0;
     }
     void Update()
     {

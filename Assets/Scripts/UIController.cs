@@ -20,9 +20,6 @@ public class UIController : MonoBehaviour
     public Text ScoreText;
 
     public Text TimerText;
-    public Transform resetPosition;
-    public GameObject player;
-    public GameObject enemy;
     public int MatchTime = 120;
     private float StartTime = 0;
     public static int p1Score = 0;
@@ -33,7 +30,6 @@ public class UIController : MonoBehaviour
     public static float elapsedTime;
 
     bool timeOver = false;
-    bool justOnce = false;
     void Start()
     {
         ResetTimers();
@@ -69,15 +65,18 @@ public class UIController : MonoBehaviour
         else if (timeOver)
         {
             if(endCanvas.alpha != 1) endCanvas.alpha = 1;
+            Time.timeScale = 0f;
             //Triangle - Play / Y - Xbox
             if (Input.GetButtonDown("ButtonUp"))
             {
                 GameOver();
+                Time.timeScale = 1f;
             }
             //Square - Play / X - Xbox
             else if (Input.GetButtonDown("ButtonLeft"))
             {
                 GoToMainMenu();
+                Time.timeScale = 1f;
             }
         }
     }
@@ -98,16 +97,9 @@ public class UIController : MonoBehaviour
         if (TimeDisplay <= 0) timeOver = true;
     }
 
-    public void ResetPosition()
-    {   
-        player.transform.position = resetPosition.transform.position;
-        enemy.transform.position = resetPosition.transform.position;
-    }
-
     public void ResetTimers()
     {
         timeOver = false;
-        justOnce = false;
         SetTimeDisplay(MatchTime);
         StartTime = Time.time;
         MatchActive = true;
