@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     public Text TimerText;
     public Transform resetPosition;
     public GameObject player;
+    public GameObject enemy;
     public int MatchTime = 120;
     private float StartTime = 0;
     public static int p1Score = 0;
@@ -100,6 +101,7 @@ public class UIController : MonoBehaviour
     public void ResetPosition()
     {   
         player.transform.position = resetPosition.transform.position;
+        enemy.transform.position = resetPosition.transform.position;
     }
 
     public void ResetTimers()
