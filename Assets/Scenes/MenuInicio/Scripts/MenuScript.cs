@@ -7,7 +7,7 @@ public class MenuScript : MonoBehaviour
 {
     public void play()
     {
-        SceneManager.LoadScene(0);//ints and such also work.
+        SceneManager.LoadScene(4);//ints and such also work.
     }
     public void options()
     {
