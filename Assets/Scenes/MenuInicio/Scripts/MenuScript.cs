@@ -14,7 +14,7 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(2);//ints and such also work.
     }
 
-    public void loggin()
+    public void login()
     {
         SceneManager.LoadScene(3);//ints and such also work.
     }
