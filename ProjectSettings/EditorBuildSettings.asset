@@ -10,14 +10,14 @@ EditorBuildSettings:
     guid: e9017d5f96b9f09489b4b37e1d6eb914
   - enabled: 0
     path: 
-    guid: a978ac80395fd844987ba976e8e95687
-  - enabled: 1
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/MenuInicio/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Opciones/Options.unity
     guid: 5e08b39aadda9cc41a20567a44fe37d4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LoginScene/LoginScene.unity
     guid: f5f41e504d91b0044ad1e3efb281fb03
   m_configObjects:

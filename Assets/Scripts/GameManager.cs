@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         //Volver a empezar partido: llamar a todos los resets blablablaç
         //crear resets de todo
         UIController.instance.ResetTimers();
+        UIController.instance.ResetPosition();
     }
 
 
