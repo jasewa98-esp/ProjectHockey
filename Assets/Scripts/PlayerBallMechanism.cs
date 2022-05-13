@@ -18,6 +18,8 @@ public class PlayerBallMechanism : MonoBehaviour
 
     bool shooting = false;
 
+    private Animator _animator;
+
 
     // Update is called once per frame
     void Update()
@@ -41,6 +43,7 @@ public class PlayerBallMechanism : MonoBehaviour
             ball.transform.position = new Vector3(0, 0, 0);
             ball.transform.SetParent(this.transform);
             ball.transform.position = ballPlayerPosition.transform.position;
+            
         }
     }
 
@@ -55,7 +58,6 @@ public class PlayerBallMechanism : MonoBehaviour
         ball.transform.GetComponent<SphereCollider>().enabled = true;
         ball.GetComponent<Rigidbody>().velocity= Vector3.zero;
         ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-
         shooting = false;
         StopCoroutine("Shoot");
     }
