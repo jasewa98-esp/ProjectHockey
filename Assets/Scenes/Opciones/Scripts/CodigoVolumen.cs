@@ -8,7 +8,7 @@ public class CodigoVolumen : MonoBehaviour
     public Slider slider;
     public float sliderValue;
     public Image imageMute;
-    // Start is called before the first frame update
+    
     void Start()
     {
         slider.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
