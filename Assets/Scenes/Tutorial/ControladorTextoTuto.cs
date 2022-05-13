@@ -22,7 +22,7 @@ namespace Scenes.Tutorial
         // Update is called once per frame
         void Update()
         {
-            checkTuto.text = "# Mover Jugador (AWSD) -> " + movePlayer + "\n# Disparo (E) -> " + disparo + "\n# Sprint (Left) -> " + sprint + "\n# Guardar (G) -> " + guardar + "\n# Pausa (Space) -> " + pausa + "\n# Cargar Partida (L) -> " + cargarPartida;
+            checkTuto.text = "# Mover Jugador (AWSD) (Joystick Izq) -> " + movePlayer + "\n# Disparo (E) (Cuadrado)-> " + disparo + "\n# Sprint (Left) (L2) -> " + sprint + "\n# Guardar (G) -> " + guardar + "\n# Pausa (Space) (R2) -> " + pausa + "\n# Cargar Partida (L) -> " + cargarPartida;
 
             if (Input.GetAxis("Horizontal").Equals(1) || Input.GetAxis("Vertical").Equals(1))
             {
