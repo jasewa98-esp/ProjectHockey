@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1026892892296",
+    "firebase_url": "https://playok-5c0cc-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "playok-5c0cc",
+    "storage_bucket": "playok-5c0cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026892892296:android:0c29bb0236c8966666f73d",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.OkeyProject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026892892296-8m06j2mje0p4b7plf78jdhmuaeh1csc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiV8O7Jp1hdZS2HlRW7WNbUkfAx8YSdIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026892892296-8m06j2mje0p4b7plf78jdhmuaeh1csc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
