@@ -11,7 +11,7 @@ public class MenuScript : MonoBehaviour
     }
     public void play()
     {
-        SceneManager.LoadScene("SelectorEquipo");//ints and such also work.
+        SceneManager.LoadScene(3);//ints and such also work.
     }
     public void game()
     {

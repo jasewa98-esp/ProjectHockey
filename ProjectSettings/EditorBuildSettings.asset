@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuInicio/MainMenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SelecorEquipo/SelectorEquipo.unity
     guid: 72d8487851831814b8cf6cc28d5ccc09
   - enabled: 1
