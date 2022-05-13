@@ -23,6 +23,7 @@ public class UIController : MonoBehaviour
     public int MatchTime = 120;
     private float StartTime = 0;
     public static int p1Score = 0;
+    public int p2ScoreBBDD = 0;
     public static int p2Score = 0;    
     private bool MatchActive = false;
     [SerializeField] private CanvasGroup endCanvas;
@@ -43,6 +44,7 @@ public class UIController : MonoBehaviour
         if(MatchActive)
         {
             ScoreText.text = "Score: " + p1Score.ToString() + " - " + p2Score.ToString();
+            p2ScoreBBDD = p2Score;
         }
     }
 
@@ -115,6 +117,7 @@ public class UIController : MonoBehaviour
         p1Score = p1;
         p2Score = p2;
         ScoreText.text = "Score: " + p1Score.ToString() + " - " + p2Score.ToString();
+        p2ScoreBBDD = p2Score;
     }
 
     public void SetTime(float time)
