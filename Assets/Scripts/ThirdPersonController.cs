@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -88,6 +89,8 @@ public class ThirdPersonController : MonoBehaviour
 	private const float _threshold = 0.01f;
 
 	private bool _hasAnimator;
+
+	private float x, y;
 
 	private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
 
@@ -233,6 +236,21 @@ public class ThirdPersonController : MonoBehaviour
 		// move the player
 		_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
+		x = Input.GetAxis("Horizontal");
+		y = Input.GetAxis("Vertical");
+
+		
+		
+		if (Input.GetKeyDown(KeyCode.E) || Input.GetButton("Fire1"))
+		{
+			_animator.SetTrigger("Disparo");
+			_animator.SetTrigger("DisparoS");
+			print("Pulsaste la E");
+		}
+
+		_animator.SetFloat("Horizontal", x);
+		_animator.SetFloat("Vertical", x);
+		
 		// update animator if using character
 		if (_hasAnimator)
 		{
