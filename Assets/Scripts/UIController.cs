@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Data.SqlClient;
+using System;
+using System.Data;
+using MySql.Data.MySqlClient;
+using Random = UnityEngine.Random;
 
 public class UIController : MonoBehaviour
 {
@@ -23,14 +28,21 @@ public class UIController : MonoBehaviour
     public int MatchTime = 120;
     private float StartTime = 0;
     public static int p1Score = 0;
-    public int p2ScoreBBDD = 0;
     public static int p2Score = 0;    
     private bool MatchActive = false;
+    public string Server = "localhost";
+    public string DataBase = "projecte_final_ok";
+    public string UserID = "root";
+    public string Password = "";
+    public bool Pooling = false;
+    public bool donete = false;
     [SerializeField] private CanvasGroup endCanvas;
+    private int id;
 
     public static float elapsedTime;
 
     bool timeOver = false;
+    //private string _connectionString = "Server=localhost;Database=projecte_final_ok;Uid=root;Pwd=";
     void Start()
     {
         ResetTimers();
@@ -44,7 +56,6 @@ public class UIController : MonoBehaviour
         if(MatchActive)
         {
             ScoreText.text = "Score: " + p1Score.ToString() + " - " + p2Score.ToString();
-            p2ScoreBBDD = p2Score;
         }
     }
 
@@ -64,9 +75,45 @@ public class UIController : MonoBehaviour
                 SetTimeDisplay(0);
             }
         }
-        else if (timeOver)
+        else if (timeOver)  
         {
-            if(endCanvas.alpha != 1) endCanvas.alpha = 1;
+            if (!donete)
+            {
+                Debug.Log("base de datos conexion ...");
+                #region Connection to MySQL
+                string connectionString =
+                  "Server=" + Server + ";" +
+                  "Database=" + DataBase + ";" +
+                  "User ID=" + UserID + ";" +
+                  "Password=" + Password + ";" +
+                  "Pooling=" + Pooling.ToString();
+
+                IDbConnection dbcon;
+                dbcon = new MySqlConnection(connectionString);
+                dbcon.Open();
+                #endregion
+
+                IDbCommand dbcmd = dbcon.CreateCommand();
+                string sql = "INSERT INTO score (scoreP1, scoreP2) VALUES (" + p1Score + ", " + p2Score + ")"; dbcmd.CommandText = sql;
+                IDataReader reader = dbcmd.ExecuteReader();
+                donete = true;
+
+
+                #region clean up
+                reader.Close();
+                reader = null;
+
+                dbcmd.Dispose();
+                dbcmd = null;
+
+                dbcon.Close();
+                dbcon = null;
+                #endregion
+
+
+            }
+
+            if (endCanvas.alpha != 1) endCanvas.alpha = 1;
             Time.timeScale = 0f;
             //Triangle - Play / Y - Xbox
             if (Input.GetButtonDown("ButtonUp"))
@@ -117,7 +164,6 @@ public class UIController : MonoBehaviour
         p1Score = p1;
         p2Score = p2;
         ScoreText.text = "Score: " + p1Score.ToString() + " - " + p2Score.ToString();
-        p2ScoreBBDD = p2Score;
     }
 
     public void SetTime(float time)
