@@ -24,6 +24,8 @@ public class PlayerBallMechanism : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Bug arreglat (RECUPERACIÓ)
+        gameObject.transform.position = new Vector3(transform.position.x, 0.878f,transform.position.z);
         //poner condicion de hacer solo si tienes a la pelota como hija
         if (Input.GetButtonDown("Fire1") && ball.transform.parent != null)
         {

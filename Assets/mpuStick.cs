@@ -48,6 +48,7 @@ public class mpuStick : MonoBehaviour
         }
         catch (Exception e)
         {
+            
             Debug.LogWarning(e.Message + "AQUI - PALO");
         }
     }
